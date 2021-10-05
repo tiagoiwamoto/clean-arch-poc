@@ -8,6 +8,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.core.entity;
  * 30/09/2021 | 07:00
  */
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_users")
 @Data
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -32,5 +34,11 @@ public class User {
     private String neighborhood;
     private String city;
     private String state;
+
+    public User() {}
+
+    public static User build() {
+        return new User();
+    }
 
 }

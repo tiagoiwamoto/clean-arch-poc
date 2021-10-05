@@ -8,7 +8,9 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
  * 30/09/2021 | 07:00
  */
 
+import br.com.tiagoiwamoto.cleanarchpoc.core.entity.User;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -31,4 +33,13 @@ public class UserDto {
     private String city;
     private String state;
 
+    public static UserDto buildUserDtoFromUser(User user){
+        UserDto userDto = build();
+        BeanUtils.copyProperties(user, userDto);
+        return userDto;
+    }
+
+    private static UserDto build() {
+        return new UserDto();
+    }
 }

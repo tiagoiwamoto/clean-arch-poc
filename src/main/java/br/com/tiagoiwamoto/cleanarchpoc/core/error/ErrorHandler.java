@@ -42,6 +42,19 @@ public class ErrorHandler {
     }
 
     /**
+     *
+     * @param ex
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(InvalidCepException.class)
+    public ResponseEntity<ApiErrorResponseDto> handlerBindingResult(InvalidCepException ex, WebRequest request){
+        log.error("Payload com erro ou mal formatado");
+
+        return ResponseEntity.badRequest().body(ApiErrorResponseDto.of("4", ex.getMessage()));
+    }
+
+    /**
      * Realiza o tratamento para chamadas realizadas pelo feign
      * @param ex
      * @param request
