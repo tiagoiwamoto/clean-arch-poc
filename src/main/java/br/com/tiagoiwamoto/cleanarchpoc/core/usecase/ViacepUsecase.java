@@ -28,7 +28,9 @@ public class ViacepUsecase {
     public ViacepDto connectToViacep(String cep){
 
         ResponseEntity<ViacepDto> viacepResponse = this.viacepGateway.call(cep);
+        log.info("Connection with via cep is completed. response -> {}", viacepResponse.toString());
         if(Objects.isNull(Objects.requireNonNull(viacepResponse.getBody()).getCep())){
+            log.error("Can't found the cep -> {}", cep);
             throw new InvalidCepException();
         }
 

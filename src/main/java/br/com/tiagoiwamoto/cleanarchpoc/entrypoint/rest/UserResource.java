@@ -12,6 +12,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserCreateUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +25,14 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(path = "/api/v1/users")
 @AllArgsConstructor
+@Slf4j
 public class UserResource {
 
     private final UserCreateUsecase userCreateUsecase;
 
     @PostMapping
     public ResponseEntity<ResponseDto> create(@RequestBody @Valid UserDto userDto){
+        log.info("starting create() of new user... {}", userDto.toString());
         return new ResponseEntity<>(
                 this.userCreateUsecase.prepareToCreateUser(userDto),
                 HttpStatus.CREATED);
