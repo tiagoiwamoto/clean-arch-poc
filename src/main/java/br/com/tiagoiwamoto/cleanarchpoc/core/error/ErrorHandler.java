@@ -54,6 +54,12 @@ public class ErrorHandler {
         return ResponseEntity.badRequest().body(ApiErrorResponseDto.of("4", ex.getMessage()));
     }
 
+    @ExceptionHandler(UserNotfoundException.class)
+    public ResponseEntity<ApiErrorResponseDto> handlerUserNotFoundException(UserNotfoundException ex, WebRequest request){
+
+        return ResponseEntity.ok(ApiErrorResponseDto.of("2", ex.getMessage()));
+    }
+
     /**
      * Realiza o tratamento para chamadas realizadas pelo feign
      * @param ex
