@@ -10,8 +10,8 @@ package br.com.tiagoiwamoto.cleanarchpoc.core.usecase;
 
 import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway.dto.ViacepDto;
 import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.repository.UserRepository;
-import br.com.tiagoiwamoto.cleanarchpoc.core.entity.User;
-import br.com.tiagoiwamoto.cleanarchpoc.core.util.AppMessage;
+import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
+import br.com.tiagoiwamoto.cleanarchpoc.util.AppMessage;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Component
@@ -51,6 +52,7 @@ public class UserCreateUsecase {
         userToCreate.setCity(viacepDto.getLocalidade());
         userToCreate.setState(viacepDto.getUf());
         userToCreate.setCep(viacepDto.getCep());
+        userToCreate.setCreatedAt(Objects.isNull(userDto.getCreatedAt()) ? LocalDateTime.now() : userDto.getCreatedAt());
         log.info("user to create or update on database -> {}", userToCreate);
 
         return this.userRepository.save(userToCreate);

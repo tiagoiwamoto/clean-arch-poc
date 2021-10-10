@@ -8,10 +8,11 @@ package br.com.tiagoiwamoto.cleanarchpoc.core.usecase;
  * 07/10/2021 | 20:17
  */
 
+import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.assembler.UserAssembler;
 import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.repository.UserRepository;
-import br.com.tiagoiwamoto.cleanarchpoc.core.entity.User;
+import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserNotfoundException;
-import br.com.tiagoiwamoto.cleanarchpoc.core.util.AppMessage;
+import br.com.tiagoiwamoto.cleanarchpoc.util.AppMessage;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
@@ -30,13 +31,17 @@ import java.util.Optional;
 public class UserRecoveryUsecase {
 
     private final UserRepository userRepository;
+    private final UserAssembler userAssembler;
 
     public ResponseDto prepareToRecoverUsers(Pageable pageable){
         Page<User> userPage = this.userRepository.findAll(pageable);
         log.info("users found on data base -> {}", userPage.getTotalElements());
         //TODO: Converter para UserDto...
         log.info("users converted to userDto ->");
-        return ApiResponseDto.of(HttpStatus.OK.name(), userPage, AppMessage.API_SUCCESS);
+        return ApiResponseDto.of(
+                HttpStatus.OK.name(),
+                this.userAssembler.toCollectionModel(userPage),
+                AppMessage.API_SUCCESS);
     }
 
     public ResponseDto prepareToRecoverUser(Long id){

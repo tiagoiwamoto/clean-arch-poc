@@ -9,6 +9,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest;
  */
 
 import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserCreateUsecase;
+import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserDeleteUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserRecoveryUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +39,7 @@ public class UserResource {
 
     private final UserCreateUsecase userCreateUsecase;
     private final UserRecoveryUsecase userRecoveryUsecase;
+    private final UserDeleteUsecase userDeleteUsecase;
 
     @ApiOperation(value = "Grava um novo usuário em nossa base de dados")
     @ApiResponses(value = {})
@@ -63,7 +66,9 @@ public class UserResource {
     @GetMapping
     public ResponseEntity<ResponseDto> recoverListOfUsers(Pageable pageable){
         log.info("starting recoverListOfUsers()... {}", pageable);
-        return new ResponseEntity<>(this.userRecoveryUsecase.prepareToRecoverUsers(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(
+                this.userRecoveryUsecase.prepareToRecoverUsers(pageable),
+                HttpStatus.OK);
     }
 
     @ApiOperation(value = "Recupera um usuário pelo seu número identificador único")
@@ -72,6 +77,14 @@ public class UserResource {
     public ResponseEntity<ResponseDto> recoverUser(@PathVariable(name = "userId") Long userId){
         log.info("starting recoverUser() with id {}...", userId);
         return new ResponseEntity<>(this.userRecoveryUsecase.prepareToRecoverUser(userId), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Realiza a exclusão lógica de um usuário pelo seu número identificador único")
+    @ApiResponses(value = {})
+    @DeleteMapping(path = "/{userId}")
+    public ResponseEntity<ResponseDto> deleteUser(@PathVariable(name = "userId") Long userId){
+        log.info("starting recoverUser() with id {}...", userId);
+        return new ResponseEntity<>(this.userDeleteUsecase.prepareToDeleteUser(userId), HttpStatus.OK);
     }
 
 }

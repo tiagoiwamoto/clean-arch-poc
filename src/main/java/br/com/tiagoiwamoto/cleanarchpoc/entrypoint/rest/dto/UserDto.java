@@ -8,13 +8,14 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
  * 30/09/2021 | 07:00
  */
 
-import br.com.tiagoiwamoto.cleanarchpoc.core.entity.User;
+import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 public class UserDto {
@@ -32,6 +33,8 @@ public class UserDto {
     private String neighborhood;
     private String city;
     private String state;
+    private LocalDateTime createdAt;
+    private LocalDateTime removedAt;
 
     public static UserDto buildUserDtoFromUser(User user){
         UserDto userDto = build();

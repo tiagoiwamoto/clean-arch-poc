@@ -1,4 +1,4 @@
-package br.com.tiagoiwamoto.cleanarchpoc.core.entity;
+package br.com.tiagoiwamoto.cleanarchpoc.core.domain;
 
 /*
  * Tiago Henrique Iwamoto
@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_users")
@@ -34,6 +35,8 @@ public class User {
     private String neighborhood;
     private String city;
     private String state;
+    private LocalDateTime createdAt;
+    private LocalDateTime removedAt;
 
     public User() {}
 

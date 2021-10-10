@@ -1,4 +1,4 @@
-package br.com.tiagoiwamoto.cleanarchpoc.core.util;
+package br.com.tiagoiwamoto.cleanarchpoc.util;
 
 /*
  * Tiago Henrique Iwamoto
