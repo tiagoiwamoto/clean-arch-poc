@@ -8,7 +8,6 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.assembler;
  * 10/10/2021 | 07:21
  */
 
-import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.UserResource;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import org.springframework.hateoas.CollectionModel;
@@ -23,10 +22,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class UserAssembler implements SimpleRepresentationModelAssembler<User> {
+public class UserAssembler implements SimpleRepresentationModelAssembler<UserDto> {
 
     @Override
-    public void addLinks(EntityModel<User> resource) {
+    public void addLinks(EntityModel<UserDto> resource) {
         Long id = Objects.requireNonNull(resource.getContent()).getId();
         Link selfLink = linkTo(methodOn(UserResource.class).recoverUser(id))
                 .withSelfRel()
@@ -44,7 +43,7 @@ public class UserAssembler implements SimpleRepresentationModelAssembler<User> {
     }
 
     @Override
-    public void addLinks(CollectionModel<EntityModel<User>> resources) {
+    public void addLinks(CollectionModel<EntityModel<UserDto>> resources) {
 
     }
 }

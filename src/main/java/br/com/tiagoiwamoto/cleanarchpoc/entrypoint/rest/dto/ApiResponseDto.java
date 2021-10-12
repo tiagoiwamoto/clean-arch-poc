@@ -8,8 +8,6 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
  * 30/09/2021 | 07:28
  */
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
