@@ -13,7 +13,9 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserDeleteUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserRecoveryUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Api(tags = {"Gerenciamento de usuário"}, description = "Api utilizando arquitetura limpa (Clean architecture)")
 @RestController
 @RequestMapping(path = "/api/v1/users")
 @AllArgsConstructor
@@ -42,7 +45,10 @@ public class UserResource {
     private final UserDeleteUsecase userDeleteUsecase;
 
     @ApiOperation(value = "Grava um novo usuário em nossa base de dados")
-    @ApiResponses(value = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Criação de registro realizada com sucesso"),
+            @ApiResponse(code = 500, message = "Tivemos uma instabilidade no sistema, uma nova tentativa deve ser realizada")
+    })
     @PostMapping
     public ResponseEntity<ResponseDto> create(@RequestBody @Valid UserDto userDto){
         log.info("starting create() of new user... {}", userDto.toString());
@@ -52,7 +58,10 @@ public class UserResource {
     }
 
     @ApiOperation(value = "Grava um novo usuário em nossa base de dados")
-    @ApiResponses(value = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Registro atualizado com sucesso ou registro não localizado em nossa base de dados"),
+            @ApiResponse(code = 500, message = "Tivemos uma instabilidade no sistema, uma nova tentativa deve ser realizada")
+    })
     @PutMapping
     public ResponseEntity<ResponseDto> update(@RequestBody @Valid UserDto userDto){
         log.info("starting update() a existing user... {}", userDto.toString());
@@ -62,7 +71,10 @@ public class UserResource {
     }
 
     @ApiOperation(value = "Recupera uma lista de usuários paginados pelo número máximo de 100 registros.")
-    @ApiResponses(value = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Registros recuperados com sucesso"),
+            @ApiResponse(code = 500, message = "Tivemos uma instabilidade no sistema, uma nova tentativa deve ser realizada")
+    })
     @GetMapping
     public ResponseEntity<ResponseDto> recoverListOfUsers(Pageable pageable){
         log.info("starting recoverListOfUsers()... {}", pageable);
@@ -72,7 +84,10 @@ public class UserResource {
     }
 
     @ApiOperation(value = "Recupera um usuário pelo seu número identificador único")
-    @ApiResponses(value = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Registro recuperado com sucesso ou registro não localizado em nossa base de dados"),
+            @ApiResponse(code = 500, message = "Tivemos uma instabilidade no sistema, uma nova tentativa deve ser realizada")
+    })
     @GetMapping(path = "/{userId}")
     public ResponseEntity<ResponseDto> recoverUser(@PathVariable(name = "userId") Long userId){
         log.info("starting recoverUser() with id {}...", userId);
@@ -80,7 +95,10 @@ public class UserResource {
     }
 
     @ApiOperation(value = "Realiza a exclusão lógica de um usuário pelo seu número identificador único")
-    @ApiResponses(value = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Exclusão lógica realizada com sucesso ou registro não localizado em nossa base de dados"),
+            @ApiResponse(code = 500, message = "Tivemos uma instabilidade no sistema, uma nova tentativa deve ser realizada")
+    })
     @DeleteMapping(path = "/{userId}")
     public ResponseEntity<ResponseDto> deleteUser(@PathVariable(name = "userId") Long userId){
         log.info("starting recoverUser() with id {}...", userId);

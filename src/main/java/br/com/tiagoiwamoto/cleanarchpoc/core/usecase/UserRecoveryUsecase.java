@@ -67,6 +67,7 @@ public class UserRecoveryUsecase {
             throw new UserNotfoundException();
         }
         UserDto userDto = UserDto.buildUserDtoFromUser(optionalUser.get());
+        userDto = this.userAssembler.toModel(userDto).getContent();
         log.info("user found and converted to userDto -> {}", userDto);
         return ApiResponseDto.of(HttpStatus.OK.name(), this.userAssembler.toModel(userDto), AppMessage.API_SUCCESS);
     }

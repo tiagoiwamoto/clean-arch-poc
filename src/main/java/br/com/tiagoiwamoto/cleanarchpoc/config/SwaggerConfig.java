@@ -27,10 +27,9 @@ public class SwaggerConfig {
     public final static String TITLE = "Clean Arch API";
     public final static String DESCRIPTION = "Example of Clean Archite";
     public final static String VERSION = "1.0.0";
-    public final static String LICENSE_URL = "http://tiagoiwamoto.com.br/license";
-    public final static String TERMS_URL = "http://tiagoiwamoto.com.br/terms";
+    public final static String LICENSE_URL = "https://choosealicense.com/licenses/gpl-3.0/";
     public final static String CONTACT_NAME = "Tiago";
-    public final static String CONTACT_URL = "http://tiagoiwamoto.com.br";
+    public final static String CONTACT_URL = "https://tiagoiwamoto.github.io";
     public final static String CONTACT_EMAIL = "tiago.iwamoto@gmail.com";
 
     @Bean
@@ -48,7 +47,6 @@ public class SwaggerConfig {
                 .description(DESCRIPTION)
                 .version(VERSION)
                 .licenseUrl(LICENSE_URL)
-                .termsOfServiceUrl(TERMS_URL)
                 .contact(new Contact(CONTACT_NAME, CONTACT_URL, CONTACT_EMAIL))
                 .build();
     }
