@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tbl_users")
 @Data
-@AllArgsConstructor
 public class User {
 
     @Id

@@ -33,6 +33,7 @@ public class UserDeleteUsecase {
     public ResponseDto prepareToDeleteUser(Long userId){
         Optional<User> optionalUser = this.userRepository.findById(userId);
         if(optionalUser.isEmpty()){
+            log.error("user with id {} not found on data base", userId);
             throw new UserNotfoundException();
         }
 

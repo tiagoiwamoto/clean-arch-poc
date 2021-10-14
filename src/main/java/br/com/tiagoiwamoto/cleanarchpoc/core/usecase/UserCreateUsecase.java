@@ -11,6 +11,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.core.usecase;
 import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway.dto.ViacepDto;
 import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.repository.UserRepository;
 import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
+import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserSaveException;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
@@ -55,6 +56,10 @@ public class UserCreateUsecase {
         userToCreate.setCreatedAt(Objects.isNull(userDto.getCreatedAt()) ? LocalDateTime.now() : userDto.getCreatedAt());
         log.info("user to create or update on database -> {}", userToCreate);
 
-        return this.userRepository.save(userToCreate);
+        try{
+            return this.userRepository.save(userToCreate);
+        }catch (Exception e){
+            throw new UserSaveException();
+        }
     }
 }
