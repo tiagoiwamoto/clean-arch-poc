@@ -5,19 +5,21 @@ package br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway;
  * tiago.iwamoto@gmail.com
  * linkedin.com/in/tiago-iwamoto
  * System specialist
- * 30/09/2021 | 07:09
+ * 16/10/2021 | 08:19
  */
 
-import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway.dto.ViacepDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(value = "viacep", url = "${app.gateway.viacep}")
-public interface ViacepGateway {
+import java.util.Map;
 
-    @GetMapping(path = "/{cep}/json/unicode/")
-    ResponseEntity<ViacepDto> call(@PathVariable("cep") String cep);
+@FeignClient(value = "swapi", url = "${app.gateway.swapi}")
+public interface SwapiGateway {
+
+    // Valor maximo é 83
+    @GetMapping(path = "/people/{value}/")
+    ResponseEntity<Map<String, Object>> call(@PathVariable(name = "value") Integer value);
 
 }

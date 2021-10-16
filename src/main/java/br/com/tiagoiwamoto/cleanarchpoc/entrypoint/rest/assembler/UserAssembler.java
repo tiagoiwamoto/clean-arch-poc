@@ -10,6 +10,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.assembler;
 
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.UserResource;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
+import lombok.SneakyThrows;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -24,6 +25,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class UserAssembler implements SimpleRepresentationModelAssembler<UserDto> {
 
+    @SneakyThrows
     @Override
     public void addLinks(EntityModel<UserDto> resource) {
         Long id = Objects.requireNonNull(resource.getContent()).getId();

@@ -19,6 +19,9 @@ public class AppMessage {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Error{
         public static final String USER_NOT_FOUND = "Não localizamos este usuário em nossa base de dados";
+        public static final String SWAPI_MAX_USER_ID = "O número máximo que pode ser passado é 83 e o minimo é 1";
+        public static final String POKEAPI_ID = "O id deve estar entre 1 e 898 ou 10001 e 10220";
+        public static final String CREATE_STRATEGY_INSTANCE = "Falha ao criar a instancia do objeto";
     }
 
 }

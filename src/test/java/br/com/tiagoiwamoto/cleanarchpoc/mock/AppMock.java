@@ -10,6 +10,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.mock;
 
 import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway.dto.ViacepDto;
 import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
+import br.com.tiagoiwamoto.cleanarchpoc.core.domain.enums.UserPreferenceEnum;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 
 public class AppMock {
 
@@ -34,11 +36,17 @@ public class AppMock {
         user.setNeighborhood("Gotham");
         user.setState("Gotham");
         user.setId(1L);
+        user.setPreference(UserPreferenceEnum.STARWARS);
+        user.setUserPrefenceId(1);
         return user;
     }
 
     public static UserDto mockUserDto(){
-        return UserDto.buildUserDtoFromUser(mockUser());
+        UserDto userDto = UserDto.buildUserDtoFromUser(mockUser());
+        userDto.setPreferenceEnum(UserPreferenceEnum.STARWARS);
+        userDto.setPreferenceId(1);
+        userDto.setPreference(new LinkedHashMap<>());
+        return userDto;
     }
 
     public static ViacepDto mockViacepDto() throws IOException {

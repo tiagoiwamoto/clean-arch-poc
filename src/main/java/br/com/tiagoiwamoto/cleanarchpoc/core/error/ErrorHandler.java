@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,24 @@ public class ErrorHandler {
         return ResponseEntity.ok(ApiErrorResponseDto.of("2", ex.getMessage()));
     }
 
+    @ExceptionHandler(SwapiMaxIdException.class)
+    public ResponseEntity<ApiErrorResponseDto> handlerSwapiMaxIdException(SwapiMaxIdException ex, WebRequest request){
+
+        return ResponseEntity.badRequest().body(ApiErrorResponseDto.of("4", ex.getMessage()));
+    }
+
+    @ExceptionHandler(PokeapiIdException.class)
+    public ResponseEntity<ApiErrorResponseDto> handlerPokeapiIdException(PokeapiIdException ex, WebRequest request){
+
+        return ResponseEntity.badRequest().body(ApiErrorResponseDto.of("4", ex.getMessage()));
+    }
+
+    @ExceptionHandler({NoSuchMethodException.class, InvocationTargetException.class, InstantiationException.class, IllegalAccessException.class})
+    public ResponseEntity<ApiErrorResponseDto> handlerCreateInstanceOfStrategyException(Exception ex, WebRequest request){
+
+        return ResponseEntity.internalServerError().body(ApiErrorResponseDto.of("5", ex.getMessage()));
+    }
+
     /**
      * Realiza o tratamento para chamadas realizadas pelo feign
      * @param ex
@@ -74,6 +93,9 @@ public class ErrorHandler {
         if(httpStatus == HttpStatus.INTERNAL_SERVER_ERROR){
             return ResponseEntity.status(httpStatus)
                     .body(ApiErrorResponseDto.of("5", "Falha de comunicação com sites parceiros, tente novamente mais tarde"));
+        }else if(httpStatus == HttpStatus.NOT_FOUND) {
+            return ResponseEntity.status(httpStatus)
+                    .body(ApiErrorResponseDto.of("4", "Não encontramos a preferencia do usuário no site parceiro"));
         }else{
             return ResponseEntity.status(httpStatus).body(ApiErrorResponseDto.of("3", httpStatus.getReasonPhrase()));
         }

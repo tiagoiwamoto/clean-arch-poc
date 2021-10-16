@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.lang.reflect.InvocationTargetException;
 
 @Api(tags = {"Gerenciamento de usuário"}, description = "Api utilizando arquitetura limpa (Clean architecture)")
 @RestController
@@ -89,7 +90,7 @@ public class UserResource {
             @ApiResponse(code = 500, message = "Tivemos uma instabilidade no sistema, uma nova tentativa deve ser realizada")
     })
     @GetMapping(path = "/{userId}")
-    public ResponseEntity<ResponseDto> recoverUser(@PathVariable(name = "userId") Long userId){
+    public ResponseEntity<ResponseDto> recoverUser(@PathVariable(name = "userId") Long userId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         log.info("starting recoverUser() with id {}...", userId);
         return new ResponseEntity<>(this.userRecoveryUsecase.prepareToRecoverUser(userId), HttpStatus.OK);
     }

@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +75,7 @@ class UserResourceTest {
 
     @Test
     @DisplayName("Chamada do endpoint /api/v1/users/{id} no verbo GET")
-    void recoverUser() {
+    void recoverUser() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         when(this.userRecoveryUsecase.prepareToRecoverUser(anyLong()))
                 .thenReturn(ApiResponseDto.of(HttpStatus.OK.name(), AppMock.mockUserDto(), AppMessage.API_SUCCESS));
         Assertions.assertEquals(HttpStatus.OK, this.userResource.recoverUser(1L).getStatusCode());

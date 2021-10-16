@@ -53,6 +53,8 @@ public class UserCreateUsecase {
         userToCreate.setCity(viacepDto.getLocalidade());
         userToCreate.setState(viacepDto.getUf());
         userToCreate.setCep(viacepDto.getCep());
+        userToCreate.setPreference(userDto.getPreferenceEnum());
+        userToCreate.setUserPrefenceId(userDto.getPreferenceId());
         userToCreate.setCreatedAt(Objects.isNull(userDto.getCreatedAt()) ? LocalDateTime.now() : userDto.getCreatedAt());
         log.info("user to create or update on database -> {}", userToCreate);
 

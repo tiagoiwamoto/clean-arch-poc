@@ -9,6 +9,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
  */
 
 import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
+import br.com.tiagoiwamoto.cleanarchpoc.core.domain.enums.UserPreferenceEnum;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 public class UserDto {
@@ -33,12 +35,17 @@ public class UserDto {
     private String neighborhood;
     private String city;
     private String state;
+    private Map<String, Object> preference;
+    private Integer preferenceId;
+    private UserPreferenceEnum preferenceEnum;
     private LocalDateTime createdAt;
     private LocalDateTime removedAt;
 
     public static UserDto buildUserDtoFromUser(User user){
         UserDto userDto = build();
         BeanUtils.copyProperties(user, userDto);
+        userDto.setPreferenceId(user.getUserPrefenceId());
+        userDto.setPreferenceEnum(user.getPreference());
         return userDto;
     }
 

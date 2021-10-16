@@ -1,4 +1,6 @@
 {
   "cep": "01001000",
-  "name": "Bruce Wayne"
+  "name": "Bruce Wayne",
+  "preferenceEnum": "STARWARS",
+  "preferenceId": 0
 }
