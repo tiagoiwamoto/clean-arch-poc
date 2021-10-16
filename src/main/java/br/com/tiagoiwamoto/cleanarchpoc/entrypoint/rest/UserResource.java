@@ -11,7 +11,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest;
 import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserCreateUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserDeleteUsecase;
 import br.com.tiagoiwamoto.cleanarchpoc.core.usecase.UserRecoveryUsecase;
-import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
+import br.com.tiagoiwamoto.cleanarchpoc.config.rest.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

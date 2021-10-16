@@ -1,4 +1,4 @@
-package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
+package br.com.tiagoiwamoto.cleanarchpoc.config.rest;
 
 /*
  * Tiago Henrique Iwamoto

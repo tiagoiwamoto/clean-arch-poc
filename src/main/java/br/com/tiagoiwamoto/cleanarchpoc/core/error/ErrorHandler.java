@@ -8,7 +8,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.core.error;
  * 30/09/2021 | 21:13
  */
 
-import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiErrorResponseDto;
+import br.com.tiagoiwamoto.cleanarchpoc.core.error.dto.ApiErrorResponseDto;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

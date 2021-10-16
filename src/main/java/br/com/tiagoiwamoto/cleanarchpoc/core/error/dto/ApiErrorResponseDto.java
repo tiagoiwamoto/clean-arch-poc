@@ -1,4 +1,4 @@
-package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
+package br.com.tiagoiwamoto.cleanarchpoc.core.error.dto;
 
 /*
  * Tiago Henrique Iwamoto
@@ -8,6 +8,7 @@ package br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto;
  * 30/09/2021 | 07:31
  */
 
+import br.com.tiagoiwamoto.cleanarchpoc.config.rest.ResponseDto;
 import lombok.Getter;
 
 import java.io.Serializable;

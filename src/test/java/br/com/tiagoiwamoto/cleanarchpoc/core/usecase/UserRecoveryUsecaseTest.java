@@ -7,6 +7,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.assembler.UserAssembler;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import br.com.tiagoiwamoto.cleanarchpoc.mock.AppMock;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -54,6 +55,7 @@ class UserRecoveryUsecaseTest {
     private UserAssembler userAssembler;
 
     @Test
+    @DisplayName("Recuperando uma lista de usuários com sucesso")
     void prepareToRecoverUsers() {
         List<User> content = new ArrayList<>();
         content.add(AppMock.mockUser());
@@ -74,6 +76,7 @@ class UserRecoveryUsecaseTest {
     }
 
     @Test
+    @DisplayName("Recuperando um usuário com sucesso")
     void prepareToRecoverUserOk() {
         when(this.userRepository.findById(anyLong())).thenReturn(Optional.of(AppMock.mockUser()));
         when(this.userAssembler.toModel(any())).thenReturn(EntityModel.of(AppMock.mockUserDto()));
@@ -81,6 +84,7 @@ class UserRecoveryUsecaseTest {
     }
 
     @Test
+    @DisplayName("Nenhum usuário localizado com o id informado")
     void prepareToRecoverUserNotfoundException() {
         when(this.userRepository.findById(anyLong())).thenReturn(Optional.empty());
         Assertions.assertThrows(

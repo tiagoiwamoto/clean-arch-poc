@@ -4,6 +4,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.repository.UserReposit
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserNotfoundException;
 import br.com.tiagoiwamoto.cleanarchpoc.mock.AppMock;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,6 +36,7 @@ class UserDeleteUsecaseTest {
     private UserRepository userRepository;
 
     @Test
+    @DisplayName("Remoção lógica de um usuário com sucesso")
     void prepareToDeleteUserOk() {
         when(this.userRepository.findById(anyLong())).thenReturn(Optional.of(AppMock.mockUser()));
         when(this.userRepository.save(any())).thenReturn(AppMock.mockUser());
@@ -42,6 +44,7 @@ class UserDeleteUsecaseTest {
     }
 
     @Test
+    @DisplayName("Falha ao realizar a remção lógica de um usuário")
     void prepareToDeleteUserUserNotfoundException() {
         when(this.userRepository.findById(anyLong())).thenReturn(Optional.empty());
         Assertions.assertThrows(

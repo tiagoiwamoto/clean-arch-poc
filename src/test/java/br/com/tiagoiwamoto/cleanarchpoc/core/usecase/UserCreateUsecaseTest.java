@@ -5,6 +5,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.error.InvalidCepException;
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserSaveException;
 import br.com.tiagoiwamoto.cleanarchpoc.mock.AppMock;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -38,6 +39,7 @@ class UserCreateUsecaseTest {
     private ViacepUsecase viacepUsecase;
 
     @Test
+    @DisplayName("Criação de um novo usuário com sucesso")
     void prepareToCreateOrUpdateUser() throws IOException {
         when(this.viacepUsecase.connectToViacep(anyString())).thenReturn(AppMock.mockViacepDto());
         when(this.userRepository.save(any())).thenReturn(AppMock.mockUser());
@@ -48,6 +50,7 @@ class UserCreateUsecaseTest {
     }
 
     @Test
+    @DisplayName("Falha ao criar um novo usuário")
     void prepareToCreateOrUpdateUserException() throws IOException {
         when(this.viacepUsecase.connectToViacep(anyString())).thenReturn(AppMock.mockViacepDto());
         when(this.userRepository.save(any())).thenThrow(NullPointerException.class);

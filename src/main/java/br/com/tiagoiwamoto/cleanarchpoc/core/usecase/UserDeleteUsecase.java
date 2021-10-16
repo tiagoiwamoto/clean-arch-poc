@@ -12,7 +12,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.repository.UserReposit
 import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserNotfoundException;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiResponseDto;
-import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
+import br.com.tiagoiwamoto.cleanarchpoc.config.rest.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import br.com.tiagoiwamoto.cleanarchpoc.util.AppMessage;
 import lombok.AllArgsConstructor;
@@ -36,10 +36,12 @@ public class UserDeleteUsecase {
             log.error("user with id {} not found on data base", userId);
             throw new UserNotfoundException();
         }
-
+        log.info("user found -> {}", optionalUser.get());
         User user = optionalUser.get();
         user.setRemovedAt(LocalDateTime.now());
+        log.info("user removed at {}", user.getRemovedAt());
         user = this.userRepository.save(user);
+        log.info("user saved at data base.");
         return ApiResponseDto.of(HttpStatus.OK.name(), UserDto.buildUserDtoFromUser(user), AppMessage.API_SUCCESS);
     }
 

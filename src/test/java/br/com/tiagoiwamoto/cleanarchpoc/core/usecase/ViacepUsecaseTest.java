@@ -5,6 +5,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway.dto.ViacepDto;
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.InvalidCepException;
 import br.com.tiagoiwamoto.cleanarchpoc.mock.AppMock;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,16 +36,18 @@ class ViacepUsecaseTest {
     private ViacepGateway viacepGateway;
 
     @Test
+    @DisplayName("Recuperando um CEP do gateway Viacep com sucesso")
     void connectToViacepOk() throws IOException {
         when(this.viacepGateway.call(anyString())).thenReturn(ResponseEntity.ok(AppMock.mockViacepDto()));
         Assertions.assertEquals(AppMock.mockViacepDto().toString(), this.viacepUsecase.connectToViacep("").toString());
     }
 
     @Test
+    @DisplayName("Falha ao recuperar um CEP do gateway Viacep")
     void connectToViacepInvalidCepException() {
         when(this.viacepGateway.call(anyString())).thenReturn(ResponseEntity.ok(new ViacepDto()));
         Assertions.assertThrows(
-                InvalidCepException.class, () -> this.viacepUsecase.connectToViacep("")
+                InvalidCepException.class, () -> this.viacepUsecase.connectToViacep("00000000")
         );
     }
 }

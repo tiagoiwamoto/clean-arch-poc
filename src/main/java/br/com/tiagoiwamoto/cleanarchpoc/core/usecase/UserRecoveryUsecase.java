@@ -13,7 +13,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserNotfoundException;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.assembler.UserAssembler;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiResponseDto;
-import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
+import br.com.tiagoiwamoto.cleanarchpoc.config.rest.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import br.com.tiagoiwamoto.cleanarchpoc.util.AppMessage;
 import lombok.AllArgsConstructor;
@@ -53,7 +53,7 @@ public class UserRecoveryUsecase {
                 userPage.getTotalElements()
         );
         userDtoPage.getTotalElements();
-        log.info("users converted to userDto ->");
+        log.info("users converted to userDto -> {}", userDtoPage.getTotalElements());
         return ApiResponseDto.of(
                 HttpStatus.OK.name(),
                 userDtoPage,

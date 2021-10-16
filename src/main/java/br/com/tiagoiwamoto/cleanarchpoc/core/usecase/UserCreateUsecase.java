@@ -13,7 +13,7 @@ import br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.repository.UserReposit
 import br.com.tiagoiwamoto.cleanarchpoc.core.domain.User;
 import br.com.tiagoiwamoto.cleanarchpoc.core.error.UserSaveException;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ApiResponseDto;
-import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.ResponseDto;
+import br.com.tiagoiwamoto.cleanarchpoc.config.rest.ResponseDto;
 import br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.UserDto;
 import br.com.tiagoiwamoto.cleanarchpoc.util.AppMessage;
 import lombok.AllArgsConstructor;
