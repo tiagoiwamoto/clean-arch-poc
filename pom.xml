@@ -108,6 +108,17 @@
                 <configuration>
                     <output>file</output>
                     <append>true</append>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                    <excludes>
+                        <exclude>**/config/**</exclude>
+                        <exclude>br.com.tiagoiwamoto.cleanarchpoc.core.dataprovider.gateway.dto.*</exclude>
+                        <exclude>br.com.tiagoiwamoto.cleanarchpoc.core.domain.**</exclude>
+                        <exclude>br.com.tiagoiwamoto.cleanarchpoc.core.error.**</exclude>
+                        <exclude>br.com.tiagoiwamoto.cleanarchpoc.entrypoint.rest.dto.**</exclude>
+                        <exclude>br.com.tiagoiwamoto.cleanarchpoc.CleanArchPocApplication</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
