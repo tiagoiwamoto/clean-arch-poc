@@ -19,5 +19,5 @@ jobs:
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
-          name: Package
+          name: clean-arch-poc-1.0.0
           path: staging
