@@ -1,18 +1,30 @@
-        br.com.tiagoiwamoto.clean
-            - config                -> separar por package com a configuração de cada serviço. Ex: kafka, redis, database, etc...
-                - database
-                - swagger
-                - kafka
-            - core                  -> Motor do serviço, toda a regra camada de acesso a base, tratamento de erros
-                - dataprovider      -> Camada com acesso a repositorios, integração com outras apis, acesso a arquivos.
-                - entity            -> Todas as entidades do sistema
-                - error             -> Exceptions personalizadas
-                - usecase           -> Onde a regra de negócio é aplicada
-                - repository        -> Camada responsável por realizar a conexão com banco de dados.
-            - entrypoint            -> Toda forma de acesso a este serviço é incluida nesta camada, rest, batch, consumer, etc...
-                - rest
-                    - dto           -> Dentro de cada pacote de entrada deve ter seus DTOS para que seja feita a conversão.
-                - kafka
+# CleanArchPoc
+Serviço modelo de arquitetura limpa
 
-Swagger URI
-http://localhost:8082/swagger-ui/index.html
+# Rodando a aplicação
+Abra o terminal na raiz do projeto (onde está o pom.xml) e execute:
+
+    mvn spring-boot:run
+
+Acesse o swagger pelo URL: http://localhost:8082/swagger-ui/index.html
+
+# Build
+Abra o terminal na raiz do projeto (onde está o pom.xml) e execute:
+
+    mvn clean package
+
+Dentro da pasta 'target' será gerado e o pacote 'clean-arch-poc-1.0.0.jar'.
+
+# Tecnologias
+- Java 15
+- Maven 3.x
+- Spring boot 2.5.x
+- Swagger
+- H2 (Memory)
+- Junit 5
+
+# Dúvidas
+Abra uma issue neste endereço:
+https://github.com/tiagoiwamoto/clean-arch-poc/issues
+
+Obrigado
